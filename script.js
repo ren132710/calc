@@ -1,21 +1,5 @@
 import Calculator from './Calc.js'
 
-/*
- *Actions / Set up event listeners, use global event listener
- *
- *  - encapsulate compute logic in class
- *  - keep UI out of the class so it can be unit tested
- *  - Behavior
- *  - Enter numbers, add to operand div
- *  - Enter operator -> moves operand to secondaryOperand, add operator to secondaryOperand
- *  - Enter numbers, add to primary Operand div
- *  - Click equal
- *     - solve problem
- *     -clear history
- *     -enter answer in operand
- *
- */
-
 const Calc = new Calculator()
 
 const operand = document.querySelector('[data-operand]')
@@ -42,13 +26,13 @@ addGlobalEventListener('click', '[data-clear-all]', (e) => {
   entry.textContent = ''
 })
 
-//Add a digit to the entry
+//add a digit to the entry
 addGlobalEventListener('click', '[data-number]', (e) => {
   Calc.addEntry(e.target.textContent)
   entry.textContent = Calc.entry
 })
 
-//Select an operator
+//specify the operator
 addGlobalEventListener('click', '[data-operator]', (e) => {
   if (operand.textContent === '') {
     Calc.operand = entry.textContent
@@ -65,9 +49,10 @@ addGlobalEventListener('click', '[data-operator]', (e) => {
 
 //equals
 addGlobalEventListener('click', '[data-equals]', (e) => {
-  //solve problem and display on operand
-  //clear history
-  console.log(e.target.textContent)
+  operand.textContent = ''
+  operator.textContent = ''
+  entry.textContent = ''
+  entry.textContent = Calc.compute()
 })
 
 //delete digit from entry

@@ -6,6 +6,7 @@ describe('#addEntry', () => {
   beforeEach(() => {
     Calc.clearAll()
   })
+
   it('should add consecutive digits to the operand', () => {
     Calc.addEntry('1')
     Calc.addEntry('2')
@@ -42,6 +43,7 @@ describe('#clearEntry, #clearAll', () => {
   beforeEach(() => {
     Calc.clearAll()
   })
+
   it('should allow clearing the entry', () => {
     Calc.addEntry('1')
     Calc.addEntry('2')
@@ -71,6 +73,7 @@ describe('.operator', () => {
   beforeEach(() => {
     Calc.clearAll()
   })
+
   it('should successfully set the operator', () => {
     Calc.operator = '+'
     expect(Calc.operator).toBe('+')
@@ -96,6 +99,7 @@ describe('#del', () => {
   beforeEach(() => {
     Calc.clearAll()
   })
+
   it('should remove one digit from entry', () => {
     Calc.addEntry('123456')
     Calc.del()
@@ -115,5 +119,45 @@ describe('#del', () => {
   it('should do nothing if entry is null', () => {
     Calc.del()
     expect(Calc.entry).toBe(null)
+  })
+})
+
+describe('#compute', () => {
+  beforeEach(() => {
+    Calc.clearAll()
+  })
+  it('should correctly sum the given entry and operand', () => {
+    Calc.addEntry('5')
+    Calc.operator = '+'
+    Calc.addEntry('10')
+    expect(Calc.compute()).toBe(15)
+  })
+
+  it('should correctly subtract the entry from the operand', () => {
+    Calc.addEntry('10')
+    Calc.operator = '-'
+    Calc.addEntry('5')
+    expect(Calc.compute()).toBe(5)
+  })
+
+  it('should correctly multiply the entry and the operand', () => {
+    Calc.addEntry('10')
+    Calc.operator = '*'
+    Calc.addEntry('5')
+    expect(Calc.compute()).toBe(50)
+  })
+
+  it('should correctly divide the operand by the entry', () => {
+    Calc.addEntry('10')
+    Calc.operator = '/'
+    Calc.addEntry('5')
+    expect(Calc.compute()).toBe(2)
+  })
+
+  it('should return "Infinity" if the operand is divided by 0', () => {
+    Calc.addEntry('10')
+    Calc.operator = '/'
+    Calc.addEntry('0')
+    expect(Calc.compute()).toBe(Infinity)
   })
 })

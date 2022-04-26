@@ -59,26 +59,30 @@ export default class Calculator {
     if (this.#entry === null) return
     this.#entry = this.#entry.slice(0, this.#entry.length - 1) ? this.#entry.slice(0, this.#entry.length - 1) : null
   }
+
+  compute() {
+    if (this.#operand == null || this.#operator == null || this.#entry == null) return
+
+    const operand = parseFloat(this.#operand)
+    const entry = parseFloat(this.#entry)
+
+    let result
+    switch (this.#operator) {
+      case '+':
+        result = operand + entry
+        break
+      case '-':
+        result = operand - entry
+        break
+      case '*':
+        result = operand * entry
+        break
+      case '/':
+        result = operand / entry
+        break
+    }
+    return result
+  }
 }
 
-// let string = '123456'
-// string = string.slice(0, string.length - 1) //?
-
-// compute() {
-//   let result
-//   switch (operator) {
-//     case '+':
-//       result = this.entry + this.secondaryentry
-//       break
-//     case '-':
-//       result = this.entry - this.secondaryentry
-//       break
-//     case '*':
-//       result = this.entry * this.secondaryentry
-//       break
-//     case '/':
-//       result = this.entry * this.secondaryentry
-//       break
-//   }
-//   return result
-// }
+//TODO: format result
