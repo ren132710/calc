@@ -91,7 +91,3 @@ describe('.operator', () => {
     expect(Calc.operator).toBe(null)
   })
 })
-
-//adding operator
-//if operand is null, then operand = entry, entry = null, display operator
-//if operand is NOT null, do nothing but display the new operator

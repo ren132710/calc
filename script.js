@@ -18,9 +18,9 @@ import Calculator from './Calc.js'
 
 const Calc = new Calculator()
 
-const entry = document.querySelector('[data-entry]')
 const operand = document.querySelector('[data-operand]')
 const operator = document.querySelector('[data-operator]')
+const entry = document.querySelector('[data-entry]')
 
 function addGlobalEventListener(type, selector, callback) {
   document.addEventListener(type, (e) => {
@@ -28,8 +28,14 @@ function addGlobalEventListener(type, selector, callback) {
   })
 }
 
+//Clear entry
+addGlobalEventListener('click', '[data-clear-entry]', (e) => {
+  Calc.clearEntry()
+  entry.textContent = ''
+})
+
 //Clear all entries
-addGlobalEventListener('click', '[data-all-clear]', (e) => {
+addGlobalEventListener('click', '[data-clear-all]', (e) => {
   Calc.clearAll()
   operand.textContent = ''
   operator.textContent = ''
