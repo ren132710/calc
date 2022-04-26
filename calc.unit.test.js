@@ -91,3 +91,29 @@ describe('.operator', () => {
     expect(Calc.operator).toBe(null)
   })
 })
+
+describe('#del', () => {
+  beforeEach(() => {
+    Calc.clearAll()
+  })
+  it('should remove one digit from entry', () => {
+    Calc.addEntry('123456')
+    Calc.del()
+    expect(Calc.entry).toBe('12345')
+    Calc.del()
+    expect(Calc.entry).toBe('1234')
+    Calc.del()
+    expect(Calc.entry).toBe('123')
+    Calc.del()
+    expect(Calc.entry).toBe('12')
+    Calc.del()
+    expect(Calc.entry).toBe('1')
+    Calc.del()
+    expect(Calc.entry).toBe(null)
+  })
+
+  it('should do nothing if entry is null', () => {
+    Calc.del()
+    expect(Calc.entry).toBe(null)
+  })
+})

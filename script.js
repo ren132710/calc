@@ -28,13 +28,13 @@ function addGlobalEventListener(type, selector, callback) {
   })
 }
 
-//Clear entry
+//clear entry
 addGlobalEventListener('click', '[data-clear-entry]', (e) => {
   Calc.clearEntry()
   entry.textContent = ''
 })
 
-//Clear all entries
+//clear all entries
 addGlobalEventListener('click', '[data-clear-all]', (e) => {
   Calc.clearAll()
   operand.textContent = ''
@@ -70,7 +70,9 @@ addGlobalEventListener('click', '[data-equals]', (e) => {
   console.log(e.target.textContent)
 })
 
-//Del button
+//delete digit from entry
 addGlobalEventListener('click', '[data-delete]', (e) => {
-  console.log(e.target)
+  Calc.del()
+  const string = entry.textContent
+  entry.textContent = string.slice(0, string.length - 1)
 })

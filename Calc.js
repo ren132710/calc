@@ -54,7 +54,15 @@ export default class Calculator {
     this.#operator = null
     this.#operand = null
   }
+
+  del() {
+    if (this.#entry === null) return
+    this.#entry = this.#entry.slice(0, this.#entry.length - 1) ? this.#entry.slice(0, this.#entry.length - 1) : null
+  }
 }
+
+// let string = '123456'
+// string = string.slice(0, string.length - 1) //?
 
 // compute() {
 //   let result
