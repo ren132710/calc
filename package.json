@@ -1,0 +1,26 @@
+{
+  "name": "calc",
+  "version": "1.0.0",
+  "description": "Practice:",
+  "main": "Calc.js",
+  "scripts": {
+    "test": "jest \\.unit\\. --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ren132710/calc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ren132710/calc/issues"
+  },
+  "homepage": "https://github.com/ren132710/calc#readme",
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.16.7",
+    "@babel/preset-env": "^7.16.11",
+    "@types/jest": "^27.4.1",
+    "jest": "^28.0.1"
+  }
+}
