@@ -38,7 +38,6 @@ addGlobalEventListener('click', '[data-number]', (e) => {
 addGlobalEventListener('click', '[data-operator]', (e) => {
   if (operand.textContent === '') {
     Calc.operand = entry.textContent
-    // console.log('operand ', Calc.operand)
     Calc.operator = e.target.textContent
     Calc.clearEntry()
 
@@ -50,7 +49,7 @@ addGlobalEventListener('click', '[data-operator]', (e) => {
   }
 })
 
-//evaluate
+//evaluate equation
 addGlobalEventListener('click', '[data-equals]', (e) => {
   operand.textContent = ''
   operator.textContent = ''

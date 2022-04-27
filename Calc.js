@@ -1,9 +1,8 @@
 export default class Calculator {
   constructor() {
-    this.#entry = null
-    this.#operator = null
-    this.#operand = null
+    this.clearAll()
   }
+
   #entry
   #operator
   #operand
