@@ -53,6 +53,16 @@ describe('#clearEntry, #clearAll', () => {
     expect(Calc.entry).toBe(null)
   })
 
+  it('should allow clearing the answer and returning to previous operator and operand', () => {
+    Calc.addEntry('55555')
+    Calc.operator = '*'
+    Calc.addEntry('10')
+    expect(Calc.compute()).toBe(555550)
+    Calc.clearEntry()
+    expect(Calc.operand).toBe('55555')
+    expect(Calc.operator).toBe('*')
+  })
+
   it('should allow clearing all entries', () => {
     Calc.addEntry('1')
     Calc.addEntry('2')
@@ -92,6 +102,17 @@ describe('.operator', () => {
     expect(Calc.operator).toBe(null)
     Calc.operator = 'abcd'
     expect(Calc.operator).toBe(null)
+  })
+})
+
+describe('.operand', () => {
+  beforeEach(() => {
+    Calc.clearAll()
+  })
+
+  it('should remove commas when setting operand', () => {
+    Calc.operand = '1,200,000'
+    expect(Calc.operand).toBe('1200000')
   })
 })
 
@@ -154,7 +175,7 @@ describe('#compute', () => {
     expect(Calc.compute()).toBe(2)
   })
 
-  it('should return "Infinity" if the operand is divided by 0', () => {
+  it('should return null if the operand is divided by 0', () => {
     Calc.addEntry('10')
     Calc.operator = '/'
     Calc.addEntry('0')

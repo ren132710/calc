@@ -32,16 +32,16 @@ export default class Calculator {
   }
 
   set operand(value) {
-    this.#operand = value
+    this.#operand = this.#unformatNumber(value)
   }
 
-  addEntry(digit) {
+  addEntry(value) {
     if (this.#entry === null) {
-      this.#entry = digit
-    } else if (digit === '.' && this.#entry.includes('.')) {
+      this.#entry = value
+    } else if (value === '.' && this.#entry.includes('.')) {
       return
     } else {
-      this.#entry = this.#entry + digit
+      this.#entry = this.#entry + value
     }
   }
 
@@ -82,9 +82,24 @@ export default class Calculator {
           return null
         } else {
           result = operand / entry
+          break
         }
-        break
     }
     return result
+  }
+
+  formatNumber(value) {
+    const numberFormatter = new Intl.NumberFormat('en')
+    const string = value?.toString() || ''
+    if (string === '') return
+
+    const [integer, decimal] = string.split('.')
+    const formattedInteger = numberFormatter.format(integer)
+    if (decimal == null) return formattedInteger
+    return formattedInteger + '.' + decimal
+  }
+
+  #unformatNumber(value) {
+    return value.replace(/,/g, '')
   }
 }
