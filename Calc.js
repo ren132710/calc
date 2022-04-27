@@ -40,7 +40,7 @@ export default class Calculator {
     } else if (value === '.' && this.#entry.includes('.')) {
       return
     } else {
-      this.#entry = this.#entry + value
+      this.#entry += value
     }
   }
 
@@ -84,6 +84,7 @@ export default class Calculator {
           break
         }
     }
+    this.#entry = result
     return result
   }
 
