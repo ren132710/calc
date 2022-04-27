@@ -158,6 +158,6 @@ describe('#compute', () => {
     Calc.addEntry('10')
     Calc.operator = '/'
     Calc.addEntry('0')
-    expect(Calc.compute()).toBe(Infinity)
+    expect(Calc.compute()).toBe(null)
   })
 })

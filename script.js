@@ -52,6 +52,7 @@ addGlobalEventListener('click', '[data-equals]', (e) => {
   operand.textContent = ''
   operator.textContent = ''
   entry.textContent = ''
+
   entry.textContent = Calc.compute()
 })
 
@@ -61,3 +62,5 @@ addGlobalEventListener('click', '[data-delete]', (e) => {
   const string = entry.textContent
   entry.textContent = string.slice(0, string.length - 1)
 })
+
+//TODO: Format numeric output

@@ -78,11 +78,13 @@ export default class Calculator {
         result = operand * entry
         break
       case '/':
-        result = operand / entry
+        if (entry === 0 || isNaN(entry)) {
+          return null
+        } else {
+          result = operand / entry
+        }
         break
     }
     return result
   }
 }
-
-//TODO: format result
