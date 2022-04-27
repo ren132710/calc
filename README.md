@@ -6,3 +6,4 @@ Practice:
 - Jest
 - Cypress
 - CSS Grid/Flex, linear-gradient
+- new Intl.NumberFormat('en')
