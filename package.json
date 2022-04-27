@@ -4,7 +4,10 @@
   "description": "Practice:",
   "main": "Calc.js",
   "scripts": {
-    "test": "jest \\.unit\\. --coverage"
+    "test:unit": "jest \\.unit\\. --coverage",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run -b chrome",
+    "test:all": "npm run test:unit && npm run cy:run"
   },
   "repository": {
     "type": "git",
@@ -21,6 +24,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.16.7",
     "@babel/preset-env": "^7.16.11",
     "@types/jest": "^27.4.1",
+    "cypress": "^9.6.0",
     "jest": "^28.0.1"
   }
 }
