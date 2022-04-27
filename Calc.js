@@ -11,37 +11,53 @@ export default class Calculator {
     return this.#entry
   }
 
-  get operator() {
-    return this.#operator
-  }
-
-  set operator(value) {
-    if (!['+', '-', '*', '/'].includes(value)) return
-    if (this.#operand == null) {
-      this.#operand = this.#entry
-      this.#entry = null
-      this.#operator = value
-    } else {
-      this.#operator = value
-    }
-  }
-
   get operand() {
     return this.#operand
   }
 
-  set operand(value) {
+  setOperand(value) {
     this.#operand = this.#unformatNumber(value)
   }
 
-  addEntry(value) {
+  get operator() {
+    return this.#operator
+  }
+
+  setOperator(value) {
+    if (this.#entry == null) return
+
+    //TODO: Could not get the .includes guard clause to work
+    // if (!['+', '-', '*', '/'].includes(value)) return
+    if (!(value === '+' || value === '-' || value === '*' || value == '/')) return
+
+    if (this.#operand == null) {
+      this.#operator = value
+      this.#operand = this.#entry
+      this.#entry = null
+    } else {
+      this.#operand = this.#doMath().toString()
+      this.#operator = value
+      this.#entry = null
+    }
+  }
+
+  setEntry(value) {
     if (this.#entry === null) {
       this.#entry = value
     } else if (value === '.' && this.#entry.includes('.')) {
       return
     } else {
-      this.#entry += value
+      this.#entry = this.#entry + value
     }
+  }
+
+  evaluate() {
+    const result = this.#doMath()
+    if (result == null) return null
+    this.#entry = result.toString()
+    this.#operand = null
+    this.#operator = null
+    return result
   }
 
   clearEntry() {
@@ -59,7 +75,7 @@ export default class Calculator {
     this.#entry = this.#entry.slice(0, this.#entry.length - 1) ? this.#entry.slice(0, this.#entry.length - 1) : null
   }
 
-  compute() {
+  #doMath() {
     if (this.#operand == null || this.#operator == null || this.#entry == null) return
 
     const operand = parseFloat(this.#operand)
@@ -78,13 +94,12 @@ export default class Calculator {
         break
       case '/':
         if (entry === 0 || isNaN(entry)) {
-          return null
+          return
         } else {
           result = operand / entry
           break
         }
     }
-    this.#entry = result
     return result
   }
 
