@@ -50,7 +50,7 @@ describe('#clearEntry, #clearAll', () => {
     Calc.setEntry('4')
     Calc.setEntry('5')
     Calc.clearEntry()
-    expect(Calc.entry).toBe(null)
+    expect(Calc.entry).toBe('')
   })
 
   it('should allow clearing the answer and starting over', () => {
@@ -59,9 +59,9 @@ describe('#clearEntry, #clearAll', () => {
     Calc.setEntry('10')
     expect(Calc.evaluate()).toBe(555550)
     Calc.clearEntry()
-    expect(Calc.operand).toBe(null)
-    expect(Calc.operator).toBe(null)
-    expect(Calc.entry).toBe(null)
+    expect(Calc.operand).toBe('')
+    expect(Calc.operator).toBe('')
+    expect(Calc.entry).toBe('')
   })
 
   it('should allow clearing all entries', () => {
@@ -75,9 +75,9 @@ describe('#clearEntry, #clearAll', () => {
     expect(Calc.operator).toBe('*')
     expect(Calc.entry).toBe('10')
     Calc.clearAll()
-    expect(Calc.entry).toBe(null)
-    expect(Calc.operator).toBe(null)
-    expect(Calc.operand).toBe(null)
+    expect(Calc.entry).toBe('')
+    expect(Calc.operator).toBe('')
+    expect(Calc.operand).toBe('')
   })
 })
 
@@ -85,9 +85,9 @@ describe('#setOperator', () => {
   beforeEach(() => {
     Calc.clearAll()
   })
-  it('should ignore if entry is null', () => {
+  it('should ignore if entry is empty string', () => {
     Calc.setOperator('+')
-    expect(Calc.operator).toBe(null)
+    expect(Calc.operator).toBe('')
   })
 
   it('should successfully set the operator', () => {
@@ -115,7 +115,7 @@ describe('#setOperator', () => {
   it('should ignore an invalid operator', () => {
     Calc.setEntry('1')
     Calc.setOperator('abcd')
-    expect(Calc.operator).toBe(null)
+    expect(Calc.operator).toBe('')
   })
 })
 
@@ -148,12 +148,12 @@ describe('#del', () => {
     Calc.del()
     expect(Calc.entry).toBe('1')
     Calc.del()
-    expect(Calc.entry).toBe(null)
+    expect(Calc.entry).toBe('')
   })
 
-  it('should do nothing if entry is null', () => {
+  it('should do nothing if entry is empty string', () => {
     Calc.del()
-    expect(Calc.entry).toBe(null)
+    expect(Calc.entry).toBe('')
   })
 })
 
@@ -173,8 +173,8 @@ describe('#evaluate', () => {
     Calc.setOperator('-')
     Calc.setEntry('5')
     expect(Calc.evaluate()).toBe(5)
-    expect(Calc.operand).toBe(null)
-    expect(Calc.operator).toBe(null)
+    expect(Calc.operand).toBe('')
+    expect(Calc.operator).toBe('')
     expect(Calc.entry).toBe('5')
   })
 
@@ -183,8 +183,8 @@ describe('#evaluate', () => {
     Calc.setOperator('*')
     Calc.setEntry('5')
     expect(Calc.evaluate()).toBe(50)
-    expect(Calc.operand).toBe(null)
-    expect(Calc.operator).toBe(null)
+    expect(Calc.operand).toBe('')
+    expect(Calc.operator).toBe('')
     expect(Calc.entry).toBe('50')
   })
 
@@ -193,12 +193,12 @@ describe('#evaluate', () => {
     Calc.setOperator('/')
     Calc.setEntry('5')
     expect(Calc.evaluate()).toBe(2)
-    expect(Calc.operand).toBe(null)
-    expect(Calc.operator).toBe(null)
+    expect(Calc.operand).toBe('')
+    expect(Calc.operator).toBe('')
     expect(Calc.entry).toBe('2')
   })
 
-  it('should return null if the operand is divided by 0', () => {
+  it('should return null string if the operand is divided by 0', () => {
     Calc.setEntry('10')
     Calc.setOperator('/')
     Calc.setEntry('0')
@@ -212,17 +212,31 @@ describe('#evaluate', () => {
     Calc.setOperator('+')
     expect(Calc.operand).toBe('9')
     expect(Calc.operator).toBe('+')
-    expect(Calc.entry).toBe(null)
+    expect(Calc.entry).toBe('')
     Calc.setEntry('1')
     Calc.setOperator('-')
     expect(Calc.operand).toBe('10')
     expect(Calc.operator).toBe('-')
-    expect(Calc.entry).toBe(null)
+    expect(Calc.entry).toBe('')
     Calc.setEntry('3')
     Calc.setOperator('/')
     expect(Calc.operand).toBe('7')
     expect(Calc.operator).toBe('/')
-    expect(Calc.entry).toBe(null)
+    expect(Calc.entry).toBe('')
     Calc.setEntry('2')
+  })
+
+  it('should correctly format a large number', () => {
+    Calc.setEntry('100000')
+    Calc.setOperator('*')
+    Calc.setEntry('10')
+    expect(Calc.formatNumber(Calc.evaluate())).toBe('1,000,000')
+  })
+
+  it('should correctly format a large numbers with decimal', () => {
+    Calc.setEntry('100000.333')
+    Calc.setOperator('*')
+    Calc.setEntry('10')
+    expect(Calc.formatNumber(Calc.evaluate())).toBe('1,000,003.33')
   })
 })

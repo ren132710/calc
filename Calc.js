@@ -24,25 +24,25 @@ export default class Calculator {
   }
 
   setOperator(value) {
-    if (this.#entry == null) return
+    if (this.#entry === '') return
 
     //TODO: Could not get the .includes guard clause to work
     // if (!['+', '-', '*', '/'].includes(value)) return
     if (!(value === '+' || value === '-' || value === '*' || value == '/')) return
 
-    if (this.#operand == null) {
+    if (this.#operand === '') {
       this.#operator = value
       this.#operand = this.#entry
-      this.#entry = null
+      this.#entry = ''
     } else {
       this.#operand = this.#doMath().toString()
       this.#operator = value
-      this.#entry = null
+      this.#entry = ''
     }
   }
 
   setEntry(value) {
-    if (this.#entry === null) {
+    if (this.#entry === '') {
       this.#entry = value
     } else if (value === '.' && this.#entry.includes('.')) {
       return
@@ -55,28 +55,28 @@ export default class Calculator {
     const result = this.#doMath()
     if (result == null) return null
     this.#entry = result.toString()
-    this.#operand = null
-    this.#operator = null
+    this.#operand = ''
+    this.#operator = ''
     return result
   }
 
   clearEntry() {
-    this.#entry = null
+    this.#entry = ''
   }
 
   clearAll() {
-    this.#entry = null
-    this.#operator = null
-    this.#operand = null
+    this.#entry = ''
+    this.#operator = ''
+    this.#operand = ''
   }
 
   del() {
-    if (this.#entry === null) return
-    this.#entry = this.#entry.slice(0, this.#entry.length - 1) ? this.#entry.slice(0, this.#entry.length - 1) : null
+    if (this.#entry === '') return
+    this.#entry = this.#entry.slice(0, this.#entry.length - 1) ? this.#entry.slice(0, this.#entry.length - 1) : ''
   }
 
   #doMath() {
-    if (this.#operand == null || this.#operator == null || this.#entry == null) return
+    if (this.#operand === '' || this.#operator === '' || this.#entry === '') return
 
     const operand = parseFloat(this.#operand)
     const entry = parseFloat(this.#entry)
