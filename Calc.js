@@ -7,10 +7,6 @@ export default class Calculator {
   #operator
   #operand
 
-  get entry() {
-    return this.#entry
-  }
-
   get operand() {
     return this.#operand
   }
@@ -26,7 +22,7 @@ export default class Calculator {
   setOperator(value) {
     if (this.#entry === '') return
 
-    //TODO: Could not get the .includes guard clause to work
+    //TODO: Could not get this .includes guard clause to work
     // if (!['+', '-', '*', '/'].includes(value)) return
     if (!(value === '+' || value === '-' || value === '*' || value == '/')) return
 
@@ -39,6 +35,10 @@ export default class Calculator {
       this.#operator = value
       this.#entry = ''
     }
+  }
+
+  get entry() {
+    return this.#entry
   }
 
   setEntry(value) {
