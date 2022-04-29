@@ -103,6 +103,10 @@ export default class Calculator {
     return result
   }
 
+  /*
+   * Add formatNumber() to the class probably violates the single responsibility principal
+   * "A class should have one, and only one, reason to change"
+   */
   formatNumber(value) {
     const numberFormatter = new Intl.NumberFormat('en')
     const string = value?.toString() || ''
