@@ -24,7 +24,7 @@ export default class Calculator {
 
     //TODO: Could not get this .includes guard clause to work
     // if (!['+', '-', '*', '/'].includes(value)) return
-    if (!(value === '+' || value === '-' || value === '*' || value == '/')) return
+    if (!(value === '+' || value === '-' || value === '*' || value === '/')) return
 
     if (this.#operand === '') {
       this.#operator = value
