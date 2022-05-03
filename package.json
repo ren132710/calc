@@ -4,10 +4,12 @@
   "description": "Practice:",
   "main": "Calc.js",
   "scripts": {
-    "test:unit": "jest \\.unit\\. --coverage",
+    "start": "serve",
     "cy:open": "cypress open",
     "cy:run": "cypress run -b chrome",
-    "test:all": "npm run test:unit && npm run cy:run"
+    "test:ui": "start-server-and-test start http://localhost:3000 cy:run",
+    "test:unit": "jest \\.unit\\. --coverage",
+    "test:all": "npm run test:unit && npm run test:ui"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,8 @@
     "@babel/preset-env": "^7.16.11",
     "@types/jest": "^27.4.1",
     "cypress": "^9.6.0",
-    "jest": "^28.0.1"
+    "jest": "^28.0.1",
+    "serve": "^13.0.2",
+    "start-server-and-test": "^1.14.0"
   }
 }
